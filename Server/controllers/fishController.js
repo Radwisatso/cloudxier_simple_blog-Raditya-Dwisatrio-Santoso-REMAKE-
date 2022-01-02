@@ -15,6 +15,20 @@ class FishController {
         }
     }
 
+    static async getFishById(req, res, next) {
+        try {
+            const result = await Fish.findByPk(+req.params.id)
+            if (!result) {
+                throw ({name: "Not Found"})
+            } else {
+                res.status(200).json(result)
+            }
+        } catch (err) {
+            console.log(err)
+            next(err)
+        }
+    }
+
     static async addFish(req, res, next) {
         const { name, description, habitat, population } = req.body
         try {
