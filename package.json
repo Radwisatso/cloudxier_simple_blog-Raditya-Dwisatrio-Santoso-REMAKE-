@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Radwisatso/cloudxier_simple_blog-Raditya-Dwisatrio-Santoso-REMAKE-/issues"
   },
-  "homepage": "https://github.com/Radwisatso/cloudxier_simple_blog-Raditya-Dwisatrio-Santoso-REMAKE-#readme"
+  "homepage": "https://github.com/Radwisatso/cloudxier_simple_blog-Raditya-Dwisatrio-Santoso-REMAKE-#readme",
+  "dependencies": {
+    "serve": "^13.0.2"
+  }
 }
