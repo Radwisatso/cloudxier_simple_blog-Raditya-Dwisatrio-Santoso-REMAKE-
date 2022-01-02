@@ -1,0 +1,20 @@
+{
+  "name": "cloudxier_simple_blog-raditya-dwisatrio-santoso-remake-",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Radwisatso/cloudxier_simple_blog-Raditya-Dwisatrio-Santoso-REMAKE-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Radwisatso/cloudxier_simple_blog-Raditya-Dwisatrio-Santoso-REMAKE-/issues"
+  },
+  "homepage": "https://github.com/Radwisatso/cloudxier_simple_blog-Raditya-Dwisatrio-Santoso-REMAKE-#readme"
+}
