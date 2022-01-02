@@ -9,7 +9,7 @@ const Home = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`https://cloudxier-blog.herokuapp.com/fishes`, data)
+        axios.get(`https://cloudxier-blog.herokuapp.com/fishes`)
         .then((res => {
             console.log("response", res.data)
             setData(res.data)

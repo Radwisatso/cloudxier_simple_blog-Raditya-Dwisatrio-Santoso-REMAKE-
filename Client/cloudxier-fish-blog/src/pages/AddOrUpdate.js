@@ -1,14 +1,20 @@
-import React, {useState} from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import { Button, Form, Input, Upload, notification, message } from 'antd'
+import React, {useState, useEffect} from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Button, Form, Input, Upload, notification, Image } from 'antd'
 import { UploadOutlined } from '@ant-design/icons';
 import axios from "axios";
 
+const {useForm} = Form
+
 const AddOrUpdate = () => {
 
+    const [form] = useForm()
     const [imageData, setImageData] = useState([])
-    const navigate = useNavigate()
+    const [imageEdit, setImageEdit] = useState("")
     const [loading, setLoading] = useState(false)
+    const [dataEdit, setDataEdit] = useState()
+    const {id} = useParams()
+    const navigate = useNavigate()
 
     const openNotificationWithIcon = (type, message) => {
         notification[type]({
@@ -26,16 +32,26 @@ const AddOrUpdate = () => {
         data.append("name", name)
         data.append("description", description)
         data.append("habitat", habitat)
-        data.append("image", image.file)
+        if (!dataEdit.image && !id) {
+            data.append("image", image.file)
+        }
         data.append("population", population)
 
+        
+        const urlAdd = "https://cloudxier-blog.herokuapp.com/fishes"
+        const urlEdit = `https://cloudxier-blog.herokuapp.com/fishes/${id}`
         const headers = {
             headers: {
                 "Content-type": "multipart/form-data"
             }
         }
 
-        axios.post("https://cloudxier-blog.herokuapp.com/fishes", data, headers)
+        axios({
+            method: id ? "PUT" : "POST",
+            url: id ? urlEdit : urlAdd,
+            data,
+            headers
+        })
         .then((res) => {
             console.log("Response 201", res)
             openNotificationWithIcon("success", res.data.message)
@@ -51,7 +67,7 @@ const AddOrUpdate = () => {
     };
 
     const props = {
-        onRemove: file => {
+        onRemove: () => {
             setImageData([])
         },
         beforeUpload: file => {
@@ -61,10 +77,38 @@ const AddOrUpdate = () => {
         imageData
     }
 
+    // Edit Section
+
+    useEffect(() => {
+        const getDataEdit = () => {
+            setLoading(true)
+            axios.get(`https://cloudxier-blog.herokuapp.com/fishes/${id}`)
+            .then((res) => {
+                console.log("ini edit", res.data)
+                form.setFieldsValue({
+                    name: res.data.name,
+                    description: res.data.description,
+                    habitat: res.data.habitat,
+                    population: res.data.population
+                })
+                setDataEdit(res.data)
+                setImageEdit(res.data.image)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+            .finally((_) => {
+                setLoading(false)
+            })
+
+        }
+        getDataEdit()
+    }, [id])
+
     return (
         <div>
             <h2>
-                Add Page
+                {id ? "Update Page" : "Add Page"}
             </h2>
             <Button type="primary" style={{margin: "20px"}}>
                 <Link to={"/"}>
@@ -73,6 +117,7 @@ const AddOrUpdate = () => {
             </Button>
             <Form
             name="add"
+            form={form}
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 16 }}
             onFinish={onFinish}
@@ -91,6 +136,10 @@ const AddOrUpdate = () => {
                     <Input type={"number"}/>
                 </Form.Item>
                 <Form.Item label="Image" name="image">
+                {
+                    id && imageData.length === 0 && <Image width={200} src={imageEdit} /> 
+                }
+                <br></br>
                     <Upload {...props}>
                         <Button icon={<UploadOutlined />}>Click to Upload</Button>
                     </Upload>
