@@ -99,6 +99,7 @@ const AddOrUpdate = () => {
 
         }
         getDataEdit()
+        //eslint-disable-next-line
     }, [id])
 
     return (
