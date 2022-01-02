@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {useParams, useNavigate, Link} from "react-router-dom";
-import { Button, Card } from 'antd';
+import {useParams, useNavigate, } from "react-router-dom";
+import { Button, Card, Popconfirm, message  } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import axios from "axios";
 
@@ -9,7 +9,7 @@ const DetailPage = () => {
     const {id} = useParams()
     const [data, setData] = useState("")
     const navigate = useNavigate()
-
+    
     useEffect(() => {
         axios.get(`https://cloudxier-blog.herokuapp.com/fishes/${id}`)
         .then((res) => {
@@ -19,7 +19,25 @@ const DetailPage = () => {
         .catch((err) => {
             console.log(err)
         })
-    }, [])
+    }, [id])
+
+    function confirm(e) {
+        console.log(e);
+        axios.delete(`https://cloudxier-blog.herokuapp.com/fishes/${id}`)
+        .then((res) => {
+            message.success('Succesfully deleted!');
+            navigate("/")
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+      
+    function cancel(e) {
+        console.log(e);
+        message.error('Not today!');
+    }
+
     return (
         <div style={{padding: "10vw", display: "flex", alignItems: "center", flexDirection: "column"}}>
             <h2 style={{ marginBottom: 30 }}>
@@ -42,9 +60,17 @@ const DetailPage = () => {
                     <Button onClick={() => navigate(`/edit/${data.id}`)}>
                         <EditOutlined /> Update here
                     </Button>,
+                    <Popconfirm
+                    title="Are you sure to delete this Fish? It can't be retrieved anymore"
+                    onConfirm={confirm}
+                    onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
+                    >
                     <Button danger>
                         <DeleteOutlined /> Delete here
                     </Button>
+                  </Popconfirm>
                 ]}
             >
                 <Meta

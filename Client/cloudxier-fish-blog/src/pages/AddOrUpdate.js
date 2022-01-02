@@ -10,9 +10,9 @@ const AddOrUpdate = () => {
 
     const [form] = useForm()
     const [imageData, setImageData] = useState([])
-    const [imageEdit, setImageEdit] = useState("")
+    const [imageEdit, setImageEdit] = useState([])
     const [loading, setLoading] = useState(false)
-    const [dataEdit, setDataEdit] = useState()
+    const [dataEdit, setDataEdit] = useState([])
     const {id} = useParams()
     const navigate = useNavigate()
 
@@ -32,25 +32,21 @@ const AddOrUpdate = () => {
         data.append("name", name)
         data.append("description", description)
         data.append("habitat", habitat)
-        if (!dataEdit.image && !id) {
-            data.append("image", image.file)
+        if(!dataEdit.image && !id) {
+            data.append('image', image.file) //BUG
         }
         data.append("population", population)
 
-        
         const urlAdd = "https://cloudxier-blog.herokuapp.com/fishes"
         const urlEdit = `https://cloudxier-blog.herokuapp.com/fishes/${id}`
         const headers = {
-            headers: {
-                "Content-type": "multipart/form-data"
-            }
+            "Content-type": "multipart/form-data"
         }
 
         axios({
             method: id ? "PUT" : "POST",
             url: id ? urlEdit : urlAdd,
-            data,
-            headers
+            data, headers
         })
         .then((res) => {
             console.log("Response 201", res)
@@ -67,7 +63,7 @@ const AddOrUpdate = () => {
     };
 
     const props = {
-        onRemove: () => {
+        onRemove: file => {
             setImageData([])
         },
         beforeUpload: file => {
@@ -140,7 +136,7 @@ const AddOrUpdate = () => {
                     id && imageData.length === 0 && <Image width={200} src={imageEdit} /> 
                 }
                 <br></br>
-                    <Upload {...props}>
+                    <Upload {...props} >
                         <Button icon={<UploadOutlined />}>Click to Upload</Button>
                     </Upload>
                 </Form.Item>
