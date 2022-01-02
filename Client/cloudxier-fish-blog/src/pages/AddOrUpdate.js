@@ -12,7 +12,7 @@ const AddOrUpdate = () => {
     const [imageData, setImageData] = useState([])
     const [imageEdit, setImageEdit] = useState([])
     const [loading, setLoading] = useState(false)
-    const [dataEdit, setDataEdit] = useState([])
+    const [dataEdit, setDataEdit] = useState("")
     const {id} = useParams()
     const navigate = useNavigate()
 
@@ -132,15 +132,16 @@ const AddOrUpdate = () => {
                 <Form.Item label="Population" name="population" rules={[{ required: true, message: "Please input the fish population"}]}>
                     <Input type={"number"}/>
                 </Form.Item>
-                <Form.Item label="Image" name="image">
                 {
                     id && imageData.length === 0 && <Image width={200} src={imageEdit} /> 
                 }
                 <br></br>
+                <Form.Item label="Image" name="image">
                     <Upload {...props} >
                         <Button icon={<UploadOutlined />}>Click to Upload</Button>
                     </Upload>
                 </Form.Item>
+                {JSON.stringify(imageData)}
                 <Button htmlType="submit" loading={loading} style={{marginBottom: "20px"}}>
                     Submit
                 </Button>
