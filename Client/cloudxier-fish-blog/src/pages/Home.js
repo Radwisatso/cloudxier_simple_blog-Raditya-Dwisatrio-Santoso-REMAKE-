@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react"
 import { Button, Card } from 'antd'
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Home = () => {
     const { Meta } = Card
     const [data, setData] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         axios.get(`https://cloudxier-blog.herokuapp.com/fishes`, data)
@@ -34,6 +35,7 @@ const Home = () => {
                     data.map((fish) => (
                         <Card
                         key={fish.id}
+                        onClick={() => navigate(`/${fish.id}`)}
                         style={{display: "flex", flexWrap: "wrap"}}
                         hoverable
                         style={{ width: 240, margin: 20 }}

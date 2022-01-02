@@ -73,20 +73,21 @@ const AddOrUpdate = () => {
             </Button>
             <Form
             name="add"
-            labelCol={{ span: 8 }}
+            labelCol={{ span: 4 }}
             wrapperCol={{ span: 16 }}
             onFinish={onFinish}
+            style={{margin: "0 20px 0 20px" }}
             >
-                <Form.Item label="Name" name="name">
+                <Form.Item label="Name" name="name" rules={[{ required: true, message: "Please input the fish name"}]}>
                     <Input />
                 </Form.Item>
-                <Form.Item label="Description" name="description">
+                <Form.Item label="Description" name="description" rules={[{ required: true, message: "Please input the fish description"}]}>
                     <Input />
                 </Form.Item>
-                <Form.Item label="Habitat" name="habitat">
+                <Form.Item label="Habitat" name="habitat" rules={[{ required: true, message: "Please input the fish habitat"}]}>
                     <Input />
                 </Form.Item>
-                <Form.Item label="Population" name="population">
+                <Form.Item label="Population" name="population" rules={[{ required: true, message: "Please input the fish population"}]}>
                     <Input type={"number"}/>
                 </Form.Item>
                 <Form.Item label="Image" name="image">
@@ -94,7 +95,7 @@ const AddOrUpdate = () => {
                         <Button icon={<UploadOutlined />}>Click to Upload</Button>
                     </Upload>
                 </Form.Item>
-                <Button htmlType="submit" loading={loading}>
+                <Button htmlType="submit" loading={loading} style={{marginBottom: "20px"}}>
                     Submit
                 </Button>
             </Form>
