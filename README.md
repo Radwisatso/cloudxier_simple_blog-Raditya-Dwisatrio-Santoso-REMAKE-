@@ -1,6 +1,7 @@
 ## Cloudxier Simple Fish Blog by Raditya Dwisatrio Santoso
 
-###LINK DEPLOY: <p> Tidak disirkulasikan, hanya diperuntukkan kepada Recruiter Cloudxier </p>
+### LINK DEPLOY: 
+<p> Tidak disirkulasikan, hanya diperuntukkan kepada Recruiter Cloudxier </p>
 
 ### Backend Report
 <p>Memulai pemrograman dengan menginstall Git Bash untuk memasukkan script ke dalam repository dan dependencies yang dibutuhkan dalam Text Editor (VSCode). Terdapat kendala saat melakukan Git dan inisialisasi Sequelize ORM, Git tidak dapat berjalan karena script berada pada file directory yang salah (tidak terdapat folder Git pada directory tersebut). Sequelize juga tidak dapat diinisiasikan karena terdapat scope yang membatasi, dengan menjalankan Set-ExecutionPolicy RemoteSigned -Scope CurrentUser pada terminal akhirnya Sequelize dapat dijalankan. Pada pembuatan aplikasi kali ini menggunakan database PostgreSQL dan menggunakan GUI Dbeaver. Bagian tersulit dirasakan saat pengimplementasian ImageKit, sering kali terjadi error dikarenakan buffer dari multer yang tidak berjalan sebagaimana mesti nya. Tahap terakhir adalah deploying server menggunakan Heroku, tahapan ini dapat dikatakan cukup tricky karena perlu diperhatikan remote branch nya berada. Server akhirnya berhasil di deploy pada hari Minggu, 2 Desember 2022.
