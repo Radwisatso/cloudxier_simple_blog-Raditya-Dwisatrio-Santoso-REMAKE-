@@ -27,7 +27,10 @@ const Home = () => {
             <h2 style={{fontSize: "150%"}}>
                 Welcome to the Fish Blog
             </h2>
-            <Button 
+            <h6>
+            [DISCLAIMER: Setiap user dapat melakukan CRUD, mohon dimaklumi jika ada sesuatu yang tidak sewajarnya ada]
+            </h6>
+            <Button
             block 
             style={{margin:"20px", width: "50%", fontSize: "13px"}}
             >
