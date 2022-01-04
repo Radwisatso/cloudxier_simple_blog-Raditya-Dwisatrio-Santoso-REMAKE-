@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
-import { Button, Card, } from 'antd'
+import { Button, Card, Spin } from 'antd'
+import { LoadingOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -7,6 +8,8 @@ const Home = () => {
     const { Meta } = Card
     const [data, setData] = useState([])
     const navigate = useNavigate()
+    const antIcon = <LoadingOutlined style={{ fontSize: 36 }} spin />;
+    const loadingElement = <Spin indicator={antIcon} /> 
 
     useEffect(() => {
         axios.get(`https://cloudxier-blog.herokuapp.com/fishes`)
@@ -31,6 +34,11 @@ const Home = () => {
                 <Link to={"/add"}>Click here to add more fish!</Link>
             </Button>
             <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center"}}>
+                <div>
+                    {
+                      data.length === 0 ? loadingElement : false
+                    }
+                </div>
                 {
                     data.map((fish) => (
                         <Card
@@ -42,7 +50,6 @@ const Home = () => {
                         cover={<img alt="example" src={fish.image} />}
                         >
                             <Meta title={fish.name} description={fish.description} />
-                            
                         </Card>
                     ))
                 }
