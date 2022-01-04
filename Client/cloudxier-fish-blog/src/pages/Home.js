@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import { Button, Card, Spin } from 'antd'
+import { Button, Card, Spin, Collapse } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,7 +9,9 @@ const Home = () => {
     const [data, setData] = useState([])
     const navigate = useNavigate()
     const antIcon = <LoadingOutlined style={{ fontSize: 36 }} spin />;
-    const loadingElement = <Spin indicator={antIcon} /> 
+    const loadingElement = <Spin indicator={antIcon} />
+    const { Panel } = Collapse;
+    const disclaimerText = <h4>Setiap user dapat melakukan CRUD, mohon dimaklumi jika ada sesuatu yang tidak sewajarnya ada</h4>
 
     useEffect(() => {
         axios.get(`https://cloudxier-blog.herokuapp.com/fishes`)
@@ -27,9 +29,14 @@ const Home = () => {
             <h2 style={{fontSize: "150%"}}>
                 Welcome to the Fish Blog
             </h2>
-            <h6>
-            [DISCLAIMER: Setiap user dapat melakukan CRUD, mohon dimaklumi jika ada sesuatu yang tidak sewajarnya ada]
-            </h6>
+            <Collapse 
+            accordion
+            style={{textAlign: "center", marginLeft: "60px", marginRight: "60px"}}
+            >
+                <Panel header="Disclaimer! Please click here">
+                    <p>{disclaimerText}</p>
+                </Panel>
+            </Collapse>
             <Button
             block 
             style={{margin:"20px", width: "50%", fontSize: "13px"}}
