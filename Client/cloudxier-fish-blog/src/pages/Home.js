@@ -31,7 +31,7 @@ const Home = () => {
             </h2>
             <Collapse 
             accordion
-            style={{textAlign: "center", marginLeft: "60px", marginRight: "60px"}}
+            style={{textAlign: "center", margin: "auto", maxWidth: "300px"}}
             >
                 <Panel header="Disclaimer! Please click here">
                     <p>{disclaimerText}</p>
